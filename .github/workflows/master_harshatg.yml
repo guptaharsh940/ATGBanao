@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://harshatg.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_252dde79af10408b9b3e64631eea9069 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_7e8de72c916b48709ec0625b6f32f33c }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_2633eef9cd2445ab8b889dfd7234fbec }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_be398d83c623489cab2c8d70ff2b5fb3 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: harshatg.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_252dde79af10408b9b3e64631eea9069 }}/helloworld:${{ github.sha }}
+        tags: harshatg.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_2633eef9cd2445ab8b889dfd7234fbec }}/helloworld:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'harshatg'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_26db40ffcac74f2f8a73f1290fc1ebd6 }}
-        images: 'harshatg.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_252dde79af10408b9b3e64631eea9069 }}/helloworld:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_99d3bb3dd72840238a1df16cf2bd12fb }}
+        images: 'harshatg.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_2633eef9cd2445ab8b889dfd7234fbec }}/helloworld:${{ github.sha }}'
