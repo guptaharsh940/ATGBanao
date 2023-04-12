@@ -1,11 +1,9 @@
-FROM python:3.8
-
-ENV SRC_DIR /usr/bin/src/webapp/src
-
-COPY src/* ${SRC_DIR}/
-
-WORKDIR ${SRC_DIR}
-
-ENV PYTHONUNBUFFERED=1
-
-CMD ["python","server.py"]
+FROM python:3.7-alpine
+WORKDIR /code
+ENV FLASK_APP app.py
+ENV FLASK_RUN_HOST 0.0.0.0
+RUN apk add --no-cache gcc musl-dev linux-headers
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["flask", "run"]
